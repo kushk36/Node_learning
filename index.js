@@ -5,10 +5,11 @@ const express = require('express')
 const cors = require('cors')
 const productRouter = require('./routes/product')
 const path = require('path')
-const { MongoClient, ServerApiVersion } = require('mongodb');
+// const { MongoClient, ServerApiVersion } = require('mongodb');
 const userRouter = require('./routes/users')
 // const uri = "mongodb+srv://kush:kush@12799@cluster0.35liz9g.mongodb.net/ecommerce/?retryWrites=true&w=majority&appName=Cluster0";
-const uri = `mongodb+srv://kush:${encodeURIComponent(process.env.DB_PASSWORD)}@cluster0.35liz9g.mongodb.net/ecommerce/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://kush:${encodeURIComponent(process.env.DB_PASSWORD)}@cluster0.35liz9g.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0`;
+// const uri = process.env.MONGO_URL
 // const { type } = require('os')
 // const exp = require('constants')
 // const morgan = require('morgan')
@@ -19,36 +20,36 @@ const server = express()
 // mongoose.connect('mongodb://127.0.0.1:27017/ecommerce');
 // db connect
 
-const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-});
+// const client = new MongoClient(uri, {
+//     serverApi: {
+//         version: ServerApiVersion.v1,
+//         strict: true,
+//         deprecationErrors: true,
+//     }
+// });
 
-// main().catch(err => console.log(err));
-main().catch(console.dir)
+main().catch(err => console.log(err));
+// main().catch(console.dir)
 
 async function main() {
     // await mongoose.connect('mongodb://127.0.0.1:27017/ecommerce');
     // await mongoose.connect(`mongodb+srv://kush:${process.env.DB_PASSWORD}@cluster0.35liz9g.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0`)
     // await mongoose.connect(`mongodb+srv://kush:${process.env.DB_PASSWORD}@cluster0.35liz9g.mongodb.net/ecommerce`);
-    // await mongoose.connect(uri)
-    // console.log('database connected..');
+    await mongoose.connect(uri)
+    console.log('database connected..');
 
     // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 
-    try {
-        // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
-        // Send a ping to confirm a successful connection
-        await client.db("ecommerce").command({ ping: 1 });
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    } finally {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-    }
+    // try {
+    //     // Connect the client to the server	(optional starting in v4.7)
+    //     await client.connect();
+    //     // Send a ping to confirm a successful connection
+    //     await client.db("ecommerce").command({ ping: 1 });
+    //     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // } finally {
+    //     // Ensures that the client will close when you finish/error
+    //     await client.close();
+    // }
 }
 
 
