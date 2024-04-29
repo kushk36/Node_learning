@@ -60,8 +60,8 @@ server.use(cors())
 // server.use(morgan('dev'))
 // server.use(express.static(process.env.PUB_DIRECTORY))  // aa rite pan lakhi sakay and niche ni rite pan lakhi sakay
 server.use(express.static(path.resolve(__dirname, process.env.PUB_DIRECTORY)))
-server.use('/', productRouter.routes)
-server.use('/api', userRouter.routes)
+server.use('/products', productRouter.routes)
+server.use('/users', userRouter.routes)
 server.use('*', (req, res) => {
     // res.sendFile(__dirname + '/build/index.html')  //tame aa rite pan lakhi sako 6o froentend na root or path module ma pan lakhi sako 6o
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
